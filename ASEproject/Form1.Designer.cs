@@ -36,6 +36,7 @@ namespace ASEproject
             this.graphicPanel = new System.Windows.Forms.Panel();
             this.commandPanel = new System.Windows.Forms.Panel();
             this.openButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveButton
@@ -101,12 +102,23 @@ namespace ASEproject
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.button3_Click);
             // 
+            // runButton
+            // 
+            this.runButton.Location = new System.Drawing.Point(611, 407);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(135, 67);
+            this.runButton.TabIndex = 6;
+            this.runButton.Text = "runButton";
+            this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1410, 542);
+            this.Controls.Add(this.runButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.commandPanel);
             this.Controls.Add(this.graphicPanel);
@@ -117,6 +129,7 @@ namespace ASEproject
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
@@ -134,8 +147,19 @@ namespace ASEproject
         private System.Windows.Forms.Panel graphicPanel;
         private System.Windows.Forms.Panel commandPanel;
         private System.Windows.Forms.Button openButton;
+        private EventHandler form1_Load;
 
-        public EventHandler Form1_Load { get; private set; }
+        public EventHandler GetForm1_Load()
+        {
+            return form1_Load;
+        }
+
+        private void SetForm1_Load(EventHandler value)
+        {
+            form1_Load = value;
+        }
+
+        private System.Windows.Forms.Button runButton;
     }
 }
 

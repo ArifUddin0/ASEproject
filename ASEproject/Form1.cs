@@ -27,10 +27,24 @@ namespace ASEproject
                 saveFileDialog.Filter = "Text|*.txt|All Files|*.*";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string textToSave = "This is the text you want to save."; // Replace with your text data
+                    string textToSave = "Command... "; // Replace with command
                     string filePath = saveFileDialog.FileName;
                     System.IO.File.WriteAllText(filePath, textToSave);
                     MessageBox.Show("Command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+                    string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath);
+                    textBoxCommand.Text = commandsToLoad;
+
                 }
             }
         }
@@ -38,7 +52,7 @@ namespace ASEproject
         private void button2_Click_1(object sender, EventArgs e)
         {
             Console.WriteLine("Button 2 pressed");
-            
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -53,7 +67,7 @@ namespace ASEproject
             if (!mouseDown)
                 return;
             Graphics g = Graphics.FromImage(myBitmap); //get graphics context off of screen bitmap
-          
+
             Refresh(); //system should update the display
         }
 
@@ -84,3 +98,7 @@ namespace ASEproject
         }
     }
 }
+
+
+
+       

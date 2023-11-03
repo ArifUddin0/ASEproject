@@ -74,7 +74,7 @@ namespace ASEproject
             // 
             // graphicPanel
             // 
-            this.graphicPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.graphicPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.graphicPanel.Location = new System.Drawing.Point(698, 18);
             this.graphicPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.graphicPanel.Name = "graphicPanel";

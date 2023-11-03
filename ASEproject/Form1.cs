@@ -55,11 +55,31 @@ namespace ASEproject
                 }
             }
         }
+        private Command commandProcessor = new Command();
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            // Retrieve the command from the textBoxCommand
+            string command = textBoxCommand.Text;
+
+            // Create a graphics object for drawing on the graphicPanel
+            Graphics g = graphicPanel.CreateGraphics();
+
+            // Takes the command then processes it and executes it
+            commandProcessor.ProcessCommand(command, g);
+
+            g.Dispose();
+
+            // Invalidate the graphicPanel to trigger a repaint
+            graphicPanel.Invalidate();
+            
+        }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             Console.WriteLine("Button 2 pressed");
         }
+
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -92,18 +112,16 @@ namespace ASEproject
 
         private void graphicPanel_Paint(object sender, PaintEventArgs e)
         {
-           
-        }
+
+         }
+
 
         private void commandPanel_Paint(object sender, PaintEventArgs e)
         {
             
         }
 
-        private void runButton_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
 

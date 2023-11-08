@@ -49,7 +49,7 @@ namespace ASEproject
             this.saveButton.TabIndex = 0;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
-            this.saveButton.Click += new System.EventHandler(this.button1_Click);
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // syntaxButton
             // 
@@ -61,7 +61,7 @@ namespace ASEproject
             this.syntaxButton.TabIndex = 1;
             this.syntaxButton.Text = "Syntax";
             this.syntaxButton.UseVisualStyleBackColor = false;
-            this.syntaxButton.Click += new System.EventHandler(this.button2_Click_1);
+            this.syntaxButton.Click += new System.EventHandler(this.syntaxButton_Click);
             // 
             // textBoxCommand
             // 
@@ -100,7 +100,7 @@ namespace ASEproject
             this.openButton.TabIndex = 5;
             this.openButton.Text = "Open";
             this.openButton.UseVisualStyleBackColor = true;
-            this.openButton.Click += new System.EventHandler(this.button3_Click);
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // runButton
             // 

@@ -9,7 +9,7 @@ namespace ASEproject
 {
     internal class CommandParser
     {
-        public void ProcessCommand(string command,Canvass canvass, Pen pen)
+        public void ProcessCommand(string command, Graphics graphics)
         {
            
         }

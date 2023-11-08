@@ -33,10 +33,11 @@ namespace ASEproject
             this.saveButton = new System.Windows.Forms.Button();
             this.syntaxButton = new System.Windows.Forms.Button();
             this.textBoxCommand = new System.Windows.Forms.TextBox();
-            this.graphicPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.commandPanel = new System.Windows.Forms.Panel();
             this.openButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -72,15 +73,14 @@ namespace ASEproject
             this.textBoxCommand.TabIndex = 2;
             this.textBoxCommand.TextChanged += new System.EventHandler(this.textBoxCommand_TextChanged);
             // 
-            // graphicPanel
+            // pictureBox1
             // 
-            this.graphicPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.graphicPanel.Location = new System.Drawing.Point(698, 18);
-            this.graphicPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.graphicPanel.Name = "graphicPanel";
-            this.graphicPanel.Size = new System.Drawing.Size(486, 332);
-            this.graphicPanel.TabIndex = 3;
-            this.graphicPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicPanel_Paint);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.pictureBox1.Location = new System.Drawing.Point(705, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(693, 512);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // commandPanel
             // 
@@ -104,7 +104,7 @@ namespace ASEproject
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(611, 407);
+            this.runButton.Location = new System.Drawing.Point(534, 74);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(135, 67);
             this.runButton.TabIndex = 6;
@@ -118,10 +118,10 @@ namespace ASEproject
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1410, 542);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.commandPanel);
-            this.Controls.Add(this.graphicPanel);
             this.Controls.Add(this.textBoxCommand);
             this.Controls.Add(this.syntaxButton);
             this.Controls.Add(this.saveButton);
@@ -134,6 +134,7 @@ namespace ASEproject
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,7 +145,6 @@ namespace ASEproject
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button syntaxButton;
         private System.Windows.Forms.TextBox textBoxCommand;
-        private System.Windows.Forms.Panel graphicPanel;
         private System.Windows.Forms.Panel commandPanel;
         private System.Windows.Forms.Button openButton;
         private EventHandler form1_Load;
@@ -160,6 +160,7 @@ namespace ASEproject
         }
 
         private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

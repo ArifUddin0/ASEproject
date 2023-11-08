@@ -11,18 +11,27 @@ namespace ASEproject
 {
     internal class MyCommandParser
     {
-        public void ProcessCommand(string command, Pen pen, MyCanvass canvas)
+
+        public MyCommandParser(string command, Pen pen, MyCanvass canvas)
         {
             Console.WriteLine("Processing command: " + command);
             string[] parts = command.Split(' ');
 
-            if (parts[0] == "circle")
+            if (parts[0] == "moveto")
             {
-                 int radius = Int32.Parse(parts[1]);
-                 MyShape circle = new MyCircle(pen.Color, 15, 15, radius);
+                int x = Int32.Parse(parts[1]);
+                int y = Int32.Parse(parts[2]);
+                canvas.MoveTo(x, y);
 
-                 canvas.DrawMyShape(circle);
             }
+
+            else if (parts[0] == "circle")
+            {
+                int radius = Int32.Parse(parts[1]);
+                MyShape circle = new MyCircle(pen.Color, 15, 15, radius);
+                canvas.DrawMyShape(circle);
+            }
+            
         }
     }
 }

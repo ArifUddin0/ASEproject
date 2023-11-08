@@ -14,16 +14,21 @@ namespace ASEproject
     {
         Bitmap myBitmap = new Bitmap(640, 480);
         Boolean mouseDown = false;
+        Pen pen;
+        Canvass canvas;
+        String command;
+        
 
         public Form1()
         {
             InitializeComponent();
+           
         }
 
-        // Form1_Load event handler for actions when the form loads
+        
         private void Form1_Load(object sender, EventArgs e)
         {
-            // You can add actions or code here if needed when the form loads.
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,7 +60,7 @@ namespace ASEproject
                 }
             }
         }
-        private Command commandProcessor = new Command();
+        private CommandParser commandProcessor = new CommandParser();
 
         private void runButton_Click(object sender, EventArgs e)
         {
@@ -66,7 +71,7 @@ namespace ASEproject
             Graphics g = graphicPanel.CreateGraphics();
 
             // Takes the command then processes it and executes it
-            commandProcessor.ProcessCommand(command, g);
+           // commandProcessor.ProcessCommand(command, g);
 
             g.Dispose();
 
@@ -107,13 +112,32 @@ namespace ASEproject
 
         private void textBoxCommand_TextChanged(object sender, EventArgs e)
         {
-            
+            // Retrieve the command from the text box
+            string command = textBoxCommand.Text;
+
+            // Create a graphics object for drawing on the graphicPanel
+            Graphics g = graphicPanel.CreateGraphics();
+
+            // Process and execute the command
+           // commandProcessor.ProcessCommand(command, g);
+
+            g.Dispose();
+
+            // Invalidate the graphicPanel to trigger a repaint
+            graphicPanel.Invalidate();
+
         }
 
         private void graphicPanel_Paint(object sender, PaintEventArgs e)
         {
+            // Your drawing code using e.Graphics here
+            // For example, draw a line from (0, 0) to (100, 100)
+            //using (Pen pen = new Pen(Color.Black)) 
+            //{
+             //   e.Graphics.DrawLine(pen, 0, 0, 100, 100);
+          //  }
 
-         }
+        }
 
 
         private void commandPanel_Paint(object sender, PaintEventArgs e)

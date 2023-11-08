@@ -12,16 +12,16 @@ namespace ASEproject
 {
     public partial class Form1 : Form
     {
-        Bitmap myBitmap = new Bitmap(640, 480);
-        Boolean mouseDown = false;
         Pen pen;
-        Canvass canvas;
+        MyCanvass canvas;
         String command;
         
 
         public Form1()
         {
             InitializeComponent();
+            pen = new Pen(Color.Red, 5);
+            canvas = new MyCanvass(300, 350);
            
         }
 
@@ -39,7 +39,7 @@ namespace ASEproject
                 saveFileDialog.Filter = "Text|*.txt|All Files|*.*";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string textToSave = "Command... "; // Replace with command
+                    string textToSave = textBoxCommand.Text;
                     string filePath = saveFileDialog.FileName;
                     System.IO.File.WriteAllText(filePath, textToSave);
                     MessageBox.Show("Command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -60,23 +60,15 @@ namespace ASEproject
                 }
             }
         }
-        private CommandParser commandProcessor = new CommandParser();
+        
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            // Retrieve the command from the textBoxCommand
-            string command = textBoxCommand.Text;
+            command = textBoxCommand.Text;
+            MyCommandParser cp = new MyCommandParser(command, pen, canvas);
 
-            // Create a graphics object for drawing on the graphicPanel
-            Graphics g = graphicPanel.CreateGraphics();
-
-            // Takes the command then processes it and executes it
-            commandProcessor.ProcessCommand(command, g);
-
-            g.Dispose();
-
-            // Invalidate the graphicPanel to trigger a repaint
-            graphicPanel.Invalidate();
+            Bitmap myBitmap = canvas.GetBitmap();
+            pictureBox1.Image = myBitmap;
             
         }
 

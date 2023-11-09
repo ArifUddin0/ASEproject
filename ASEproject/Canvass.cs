@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ASEproject
 {
@@ -21,6 +22,7 @@ namespace ASEproject
         {
             p = new Point(x, y);    
         }
+ 
         public MyCanvass(int width, int height)
         {
             myBitmap= new Bitmap(width, height);
@@ -30,5 +32,13 @@ namespace ASEproject
         {
             return myBitmap;
         }
+
+        public void Clear()
+        {
+            myBitmap = new Bitmap(myBitmap.Width, myBitmap.Height);
+            g = Graphics.FromImage(myBitmap);
+            //pictureBox1.Image = myBitmap;
+        }
+
     }
 }

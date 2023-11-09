@@ -57,8 +57,10 @@ namespace ASEproject
                     string selectedFilePath = openFileDialog.FileName;
                     string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath);
                     textBoxCommand.Text = commandsToLoad;
+                   
                 }
             }
+            
         }
         
 

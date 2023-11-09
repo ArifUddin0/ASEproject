@@ -30,8 +30,15 @@ namespace ASEproject
                 int radius = Int32.Parse(parts[1]);
                 MyShape circle = new MyCircle(pen.Color, 15, 15, radius);
                 canvas.DrawMyShape(circle);
+
             }
-            
+
+            else if (parts[0] == "clear")
+            {
+                canvas.Clear();
+            }
+
+
         }
     }
 }

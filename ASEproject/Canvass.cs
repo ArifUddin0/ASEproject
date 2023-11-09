@@ -22,7 +22,16 @@ namespace ASEproject
         {
             p = new Point(x, y);    
         }
- 
+        public void Clear()
+        {
+            myBitmap = new Bitmap(myBitmap.Width, myBitmap.Height);
+            g = Graphics.FromImage(myBitmap);
+        }
+        public void Reset()
+        {
+            MoveTo(0, 0);
+        }
+
         public MyCanvass(int width, int height)
         {
             myBitmap= new Bitmap(width, height);
@@ -33,12 +42,7 @@ namespace ASEproject
             return myBitmap;
         }
 
-        public void Clear()
-        {
-            myBitmap = new Bitmap(myBitmap.Width, myBitmap.Height);
-            g = Graphics.FromImage(myBitmap);
-            //pictureBox1.Image = myBitmap;
-        }
+        
 
     }
 }

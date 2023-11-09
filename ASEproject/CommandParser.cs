@@ -37,6 +37,10 @@ namespace ASEproject
             {
                 canvas.Clear();
             }
+            else if (parts[0] == "reset")
+            {
+                canvas.Reset();
+            }
 
 
         }

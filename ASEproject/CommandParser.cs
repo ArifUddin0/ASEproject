@@ -41,6 +41,12 @@ namespace ASEproject
             {
                 canvas.Reset();
             }
+            else if (parts[0] == "drawto")
+            {
+                int x = Int32.Parse(parts[1]);
+                int y = Int32.Parse(parts[2]);
+                canvas.DrawTo(x, y);
+            }
 
 
         }

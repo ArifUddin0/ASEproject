@@ -34,9 +34,9 @@ namespace ASEproject
             this.syntaxButton = new System.Windows.Forms.Button();
             this.textBoxCommand = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.commandPanel = new System.Windows.Forms.Panel();
             this.openButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            this.multiTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,16 +82,6 @@ namespace ASEproject
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // commandPanel
-            // 
-            this.commandPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.commandPanel.Location = new System.Drawing.Point(39, 18);
-            this.commandPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.commandPanel.Name = "commandPanel";
-            this.commandPanel.Size = new System.Drawing.Size(488, 332);
-            this.commandPanel.TabIndex = 4;
-            this.commandPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.commandPanel_Paint);
-            // 
             // openButton
             // 
             this.openButton.Location = new System.Drawing.Point(171, 422);
@@ -112,16 +102,24 @@ namespace ASEproject
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
+            // multiTextBox
+            // 
+            this.multiTextBox.Location = new System.Drawing.Point(39, 12);
+            this.multiTextBox.Multiline = true;
+            this.multiTextBox.Name = "multiTextBox";
+            this.multiTextBox.Size = new System.Drawing.Size(486, 353);
+            this.multiTextBox.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1410, 542);
+            this.Controls.Add(this.multiTextBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.openButton);
-            this.Controls.Add(this.commandPanel);
             this.Controls.Add(this.textBoxCommand);
             this.Controls.Add(this.syntaxButton);
             this.Controls.Add(this.saveButton);
@@ -145,7 +143,6 @@ namespace ASEproject
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button syntaxButton;
         private System.Windows.Forms.TextBox textBoxCommand;
-        private System.Windows.Forms.Panel commandPanel;
         private System.Windows.Forms.Button openButton;
         private EventHandler form1_Load;
 
@@ -161,6 +158,7 @@ namespace ASEproject
 
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox multiTextBox;
     }
 }
 

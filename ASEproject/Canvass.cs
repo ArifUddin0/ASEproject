@@ -31,7 +31,12 @@ namespace ASEproject
         {
             MoveTo(0, 0);
         }
-
+        public void DrawTo(int x, int y)
+        {
+            Pen myPen = new Pen(Color.Red, 5);
+            g.DrawLine(myPen, p.X, p.Y, x, y);
+            p = new Point(x, y);
+        }
         public MyCanvass(int width, int height)
         {
             myBitmap= new Bitmap(width, height);

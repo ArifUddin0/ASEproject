@@ -67,6 +67,7 @@ namespace ASEproject
         private void runButton_Click(object sender, EventArgs e)
         {
             command = textBoxCommand.Text;
+            command = multiTextBox.Text;
             MyCommandParser cp = new MyCommandParser(command, pen, canvas);
 
             Bitmap myBitmap = canvas.GetBitmap();
@@ -106,17 +107,7 @@ namespace ASEproject
 
         }
 
-        private void graphicPanel_Paint(object sender, PaintEventArgs e)
-        {
-           
-
-        }
-
-
-        private void commandPanel_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
+        
 
         
     }

@@ -32,8 +32,16 @@ namespace ASEproject
                     canvas.DrawMyShape(circle);
 
                 }
+                else if (parts[0] == "rectangle")
+                {
+                int height = Int32.Parse(parts[1]);
+                int width = Int32.Parse(parts[2]);
+                MyShape rectangle = new MyRectangle(pen.Color, 15, 15, height, width);
+                canvas.DrawMyShape(rectangle);
 
-                else if (parts[0] == "clear")
+                 }
+
+            else if (parts[0] == "clear")
                 {
                     canvas.Clear();
                 }

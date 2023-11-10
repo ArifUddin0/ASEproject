@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASEproject
 {
-    internal class MyCircle : MyShape
+    public class MyCircle : MyShape
     {
        
         protected int myRadius;

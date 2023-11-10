@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ASEproject
 
 {
-    internal class MyCommandParser
+    public class MyCommandParser
     {
        
         public MyCommandParser(string command, Pen pen, MyCanvass canvas)

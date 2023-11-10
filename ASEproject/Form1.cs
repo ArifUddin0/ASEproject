@@ -105,7 +105,11 @@ namespace ASEproject
 
         private void syntaxButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(" ");
+            string codeSingle = textBoxCommand.Text;
+            string codeMulti = multiTextBox.Text;
+            string[] codeList = { codeSingle, codeMulti };
+            try
+            { }
         }
 
 

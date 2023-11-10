@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASEproject
 {
-    internal class MyRectangle:MyShape
+    public class MyRectangle:MyShape
     {
          
           protected int height;

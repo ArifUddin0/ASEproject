@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASEproject
 {
-    internal class MyTriangle:MyShape
+    public class MyTriangle:MyShape
     {
         protected int sideLength;
        

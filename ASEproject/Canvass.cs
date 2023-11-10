@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ASEproject
 {
-    internal class MyCanvass
+    public class MyCanvass
     {
         private Graphics g;
         private Point p;

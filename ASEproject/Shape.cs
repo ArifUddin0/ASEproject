@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ASEproject
 
 {
-    abstract class MyShape
+    public abstract class MyShape
     {
         protected Color myColor;
         protected int myX, myY;

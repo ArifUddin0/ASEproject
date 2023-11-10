@@ -40,21 +40,28 @@ namespace ASEproject
                 canvas.DrawMyShape(rectangle);
 
                  }
-
-            else if (parts[0] == "clear")
+                else if (parts[0] == "triangle")
                 {
+                int sideLength = Int32.Parse(parts[1]);
+                MyShape triangle = new MyTriangle(pen.Color, 15, 15, sideLength);
+                canvas.DrawMyShape(triangle);
+
+                 }
+
+                 else if (parts[0] == "clear")
+                    {
                     canvas.Clear();
-                }
+                 }
                 else if (parts[0] == "reset")
                 {
                     canvas.Reset();
-                }
+                  }
                 else if (parts[0] == "drawto")
                 {
                     int x = Int32.Parse(parts[1]);
                     int y = Int32.Parse(parts[2]);
                     canvas.DrawTo(x, y);
-                }
+                 }
 
 
         }

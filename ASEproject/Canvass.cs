@@ -11,7 +11,7 @@ namespace ASEproject
     public class MyCanvass
     {
         private Graphics g;
-        private Point p;
+        public Point p;
         private Bitmap myBitmap;
 
         public void DrawMyShape(MyShape shape)

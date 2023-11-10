@@ -108,9 +108,131 @@ namespace ASEproject
             string codeSingle = textBoxCommand.Text;
             string codeMulti = multiTextBox.Text;
             string[] codeList = { codeSingle, codeMulti };
-            try
-            { }
-        }
+
+            StringBuilder validationResults = new StringBuilder();
+            foreach (string code in codeList)
+            {
+                string[] parts = code.Split(' ');
+
+                if (parts.Length > 0)
+                {
+                    string command = parts[0];
+
+                    try
+                    {
+                      
+
+                        switch (command)
+                        {
+                            case "moveto":
+                                if (parts.Length == 3)
+                                {
+                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
+                                    {
+                                        validationResults.AppendLine("Valid 'moveto' command");
+                                    }
+                                    else
+                                    {
+                                        validationResults.AppendLine("Invalid parameter types for 'moveto'");
+                                    }
+                                }
+                                else
+                                {
+                                    validationResults.AppendLine("Incorrect number of parameters for 'moveto'");
+                                }
+                                break;
+
+                              case "circle":
+                                if (parts.Length >= 2 && int.TryParse(parts[1], out _))
+                                {
+                                    validationResults.AppendLine("Valid 'circle' command");
+                                }
+                                else
+                                {
+                                    validationResults.AppendLine("Invalid 'circle' command or missing/invalid parameter");
+                                }
+                                break;
+
+                            case "rectangle":
+                                if (parts.Length == 3)
+                                {
+                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
+                                    {
+                                        validationResults.AppendLine("Valid 'rectangle' command");
+                                    }
+                                    else
+                                    {
+                                        validationResults.AppendLine("Invalid parameter(s) for 'rectangle' command");
+                                    }
+                                }
+                             
+
+                                    break;
+
+                            case "triangle":
+                                if (parts.Length == 2)
+                                {
+                                    if (int.TryParse(parts[1], out _))
+                                    {
+                                        validationResults.AppendLine("Valid 'triangle' command");
+                                    }
+                                    else
+                                    {
+                                        validationResults.AppendLine("Invalid parameter(s) for 'triangle' command");
+                                    }
+                                }
+                                
+                                break;
+
+
+                            case "clear":
+
+                                break;
+
+                            case "reset":
+
+                                break;
+
+                            case "drawto":
+
+                                if (parts.Length == 3)
+                                {
+                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
+                                    {
+                                        validationResults.AppendLine("Valid 'drawto' command");
+                                    }
+                                    else
+                                    {
+                                        validationResults.AppendLine("Invalid parameter types for 'drawto'");
+                                    }
+                                }
+                                else
+                                {
+                                    validationResults.AppendLine("Incorrect number of parameters for 'drawto'");
+                                }
+                                break;
+
+
+                            default:
+                                validationResults.AppendLine("Unrecognized command");
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        validationResults.AppendLine($"Error: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    validationResults.AppendLine("Empty or invalid command");
+                }
+            }
+
+            MessageBox.Show(validationResults.ToString(), "Syntax Validation Results");
+        
+
+    }
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)

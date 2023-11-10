@@ -36,13 +36,32 @@ namespace ASEproject
             // Perform the "Save" action here
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
+                string textToSave = string.Empty;
                 saveFileDialog.Filter = "Text|*.txt|All Files|*.*";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+
+                if (!string.IsNullOrWhiteSpace(textBoxCommand.Text))
                 {
-                    string textToSave = textBoxCommand.Text;
+                    textToSave = textBoxCommand.Text;
+                    saveFileDialog.ShowDialog();
                     string filePath = saveFileDialog.FileName;
-                    System.IO.File.WriteAllText(filePath, textToSave);
-                    MessageBox.Show("Command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        System.IO.File.WriteAllText(filePath, textToSave);
+                        MessageBox.Show("Command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (!string.IsNullOrWhiteSpace(multiTextBox.Text))
+                {
+                    textToSave = multiTextBox.Text;
+                    saveFileDialog.ShowDialog();
+                    string filePath = saveFileDialog.FileName;
+
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        System.IO.File.WriteAllText(filePath, textToSave);
+                        MessageBox.Show("Multi command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -57,8 +76,8 @@ namespace ASEproject
                     string selectedFilePath = openFileDialog.FileName;
                     string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath);
                     textBoxCommand.Text = commandsToLoad;
+                    multiTextBox.Text = commandsToLoad;
 
-                   
                 }
             }
             
@@ -86,7 +105,7 @@ namespace ASEproject
 
         private void syntaxButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Button 2 pressed");
+            Console.WriteLine(" ");
         }
 
 

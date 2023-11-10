@@ -57,6 +57,7 @@ namespace ASEproject
                     string selectedFilePath = openFileDialog.FileName;
                     string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath);
                     textBoxCommand.Text = commandsToLoad;
+
                    
                 }
             }
@@ -67,11 +68,19 @@ namespace ASEproject
         private void runButton_Click(object sender, EventArgs e)
         {
             command = textBoxCommand.Text;
-            command = multiTextBox.Text;
+
             MyCommandParser cp = new MyCommandParser(command, pen, canvas);
 
             Bitmap myBitmap = canvas.GetBitmap();
             pictureBox1.Image = myBitmap;
+
+            command = multiTextBox.Text;
+            string[] commands = command.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var cmd in commands)
+            {
+                MyCommandParser commandprocessor = new MyCommandParser(cmd, pen, canvas);
+            }
             
         }
 

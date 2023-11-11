@@ -15,14 +15,16 @@ namespace ASEproject
         Pen pen;
         MyCanvass canvas;
         String command;
-        
 
+        /// <summary>
+        /// Constructor for the main form.
+        /// </summary>
         public Form1()
         {
-            InitializeComponent();
-            pen = new Pen(Color.Red, 5);
-            canvas = new MyCanvass(300, 350);
-           
+            InitializeComponent(); // Initializes the form component
+            pen = new Pen(Color.Red, 5); // Initializes a Pen 
+            canvas = new MyCanvass(300, 350); // Initializes the canvas
+
         }
 
         
@@ -31,78 +33,96 @@ namespace ASEproject
            
         }
 
+        /// <summary>
+        /// Event handler to save the commands written in the text boxes.
+        /// </summary>
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // Perform the "Save" action here
+            // Opens a 'Save File' dialog to choose a location to save the commands.
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 string textToSave = string.Empty;
-                saveFileDialog.Filter = "Text|*.txt|All Files|*.*";
+                saveFileDialog.Filter = "Text|*.txt|All Files|*.*"; // Filters for files type.
 
+                // If the single line textbox has content
                 if (!string.IsNullOrWhiteSpace(textBoxCommand.Text))
                 {
-                    textToSave = textBoxCommand.Text;
-                    saveFileDialog.ShowDialog();
-                    string filePath = saveFileDialog.FileName;
+                    textToSave = textBoxCommand.Text;  // Assigns the content of the single line textbox.
+                    saveFileDialog.ShowDialog(); // Shows the dialog for saving the file.
+                    string filePath = saveFileDialog.FileName;  // Gets files path.
 
+                    // If a file path is provided.
                     if (!string.IsNullOrEmpty(filePath))
                     {
-                        System.IO.File.WriteAllText(filePath, textToSave);
+                        // Writes the content of the single line textbox to the selected file
+                        System.IO.File.WriteAllText(filePath, textToSave); 
                         MessageBox.Show("Command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Shows a confirmation message for saving the command
                     }
                 }
+                // If the multi-line textbox has content
                 else if (!string.IsNullOrWhiteSpace(multiTextBox.Text))
                 {
-                    textToSave = multiTextBox.Text;
-                    saveFileDialog.ShowDialog();
-                    string filePath = saveFileDialog.FileName;
+                    textToSave = multiTextBox.Text; // Assigns the content of the multi-line textbox
+                    saveFileDialog.ShowDialog();  // Shows the dialog for saving the file
+                    string filePath = saveFileDialog.FileName; // Gets the file path
 
-                    if (!string.IsNullOrEmpty(filePath))
+                    if (!string.IsNullOrEmpty(filePath)) // If a file path is provided
                     {
-                        System.IO.File.WriteAllText(filePath, textToSave);
+                        // Writes the content of the multi-line textbox to the selected file
+                        System.IO.File.WriteAllText(filePath, textToSave); 
                         MessageBox.Show("Multi command saved successfully.", "Save Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Shows a confirmation message for saving the command
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Event handler to open and load commands from a selected text file.
+        /// </summary>
         private void openButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                openFileDialog.Filter = "Text Files|*.txt|All Files|*.*";  // Filter for text files.
+                if (openFileDialog.ShowDialog() == DialogResult.OK) // Opens file dialog to select a file.
                 {
-                    string selectedFilePath = openFileDialog.FileName;
-                    string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath);
-                    textBoxCommand.Text = commandsToLoad;
-                    multiTextBox.Text = commandsToLoad;
+                    string selectedFilePath = openFileDialog.FileName; // Retrieves the selected file path.
+                    string commandsToLoad = System.IO.File.ReadAllText(selectedFilePath); // Reads the content of the selected files.
+                    textBoxCommand.Text = commandsToLoad; // Populates the single line textbox with the loaded commands
+                    multiTextBox.Text = commandsToLoad; // Populates the multi line textbox with the loaded commands
 
                 }
             }
             
         }
-        
 
+        /// <summary>
+        /// Event handler for executing the command that are entered.
+        /// </summary>
         private void runButton_Click(object sender, EventArgs e)
         {
-            command = textBoxCommand.Text;
+            command = textBoxCommand.Text; // Gets the command from a single-line text box.
 
-            MyCommandParser cp = new MyCommandParser(command, pen, canvas);
+            MyCommandParser cp = new MyCommandParser(command, pen, canvas); //processes the command.
 
             Bitmap myBitmap = canvas.GetBitmap();
-            pictureBox1.Image = myBitmap;
+            pictureBox1.Image = myBitmap; // Updates the image based on the command processed.
 
             command = multiTextBox.Text;
-            string[] commands = command.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] commands = command.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries); // Gets the command from multi box text.
 
             foreach (var cmd in commands)
             {
-                MyCommandParser commandprocessor = new MyCommandParser(cmd, pen, canvas);
+                MyCommandParser commandprocessor = new MyCommandParser(cmd, pen, canvas); // Processes each multi-line command.
             }
             
         }
 
+        /// <summary>
+        /// Event handler for validating commands upon button click.
+        /// </summary>
         private void syntaxButton_Click(object sender, EventArgs e)
         {
             string codeSingle = textBoxCommand.Text; //gets code from the single line text box

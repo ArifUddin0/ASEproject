@@ -105,16 +105,16 @@ namespace ASEproject
 
         private void syntaxButton_Click(object sender, EventArgs e)
         {
-            string codeSingle = textBoxCommand.Text;
-            string codeMulti = multiTextBox.Text;
-            string[] codeList = { codeSingle, codeMulti };
+            string codeSingle = textBoxCommand.Text; //gets code from the single line text box
+            string codeMulti = multiTextBox.Text; //gets code from the multi line text box
+            string[] codeList = { codeSingle, codeMulti }; //combination of both of them
 
-            StringBuilder validationResults = new StringBuilder();
-            foreach (string code in codeList)
+            StringBuilder validationResults = new StringBuilder(); // starting a string builder to hold the validation reults 
+            foreach (string code in codeList) //Goes through the commands given
             {
-                string[] parts = code.Split(' ');
+                string[] parts = code.Split(' '); // Command is split up into parts
 
-                if (parts.Length > 0)
+                if (parts.Length > 0) //here it checks if commands contain any parts
                 {
                     string command = parts[0];
 
@@ -122,12 +122,12 @@ namespace ASEproject
                     {
                       
 
-                        switch (command)
+                        switch (command) //checking the command type 
                         {
                             case "moveto":
                                 if (parts.Length == 3)
                                 {
-                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
+                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _)) //checks if the command is valid with correct parameters
                                     {
                                         validationResults.AppendLine("Valid 'moveto' command");
                                     }
@@ -165,7 +165,7 @@ namespace ASEproject
                                         validationResults.AppendLine("Invalid parameter(s) for 'rectangle' command");
                                     }
                                 }
-                             
+                              
 
                                     break;
 
@@ -197,7 +197,7 @@ namespace ASEproject
 
                                 if (parts.Length == 3)
                                 {
-                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
+                                    if (int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _)) //checking if its valid command with correct parameters
                                     {
                                         validationResults.AppendLine("Valid 'drawto' command");
                                     }
@@ -229,7 +229,7 @@ namespace ASEproject
                 }
             }
 
-            MessageBox.Show(validationResults.ToString(), "Syntax Validation Results");
+            MessageBox.Show(validationResults.ToString(), "Syntax Validation Results"); //displays a message box wiht the validation results
         
 
     }

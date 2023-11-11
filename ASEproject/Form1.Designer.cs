@@ -43,10 +43,10 @@ namespace ASEproject
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveButton.Location = new System.Drawing.Point(39, 422);
+            this.saveButton.Location = new System.Drawing.Point(171, 10);
             this.saveButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(124, 52);
+            this.saveButton.Size = new System.Drawing.Size(86, 52);
             this.saveButton.TabIndex = 0;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
@@ -55,10 +55,10 @@ namespace ASEproject
             // syntaxButton
             // 
             this.syntaxButton.BackColor = System.Drawing.Color.Transparent;
-            this.syntaxButton.Location = new System.Drawing.Point(409, 422);
+            this.syntaxButton.Location = new System.Drawing.Point(119, 508);
             this.syntaxButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.syntaxButton.Name = "syntaxButton";
-            this.syntaxButton.Size = new System.Drawing.Size(116, 52);
+            this.syntaxButton.Size = new System.Drawing.Size(138, 119);
             this.syntaxButton.TabIndex = 1;
             this.syntaxButton.Text = "Syntax";
             this.syntaxButton.UseVisualStyleBackColor = false;
@@ -66,27 +66,27 @@ namespace ASEproject
             // 
             // textBoxCommand
             // 
-            this.textBoxCommand.Location = new System.Drawing.Point(39, 382);
+            this.textBoxCommand.Location = new System.Drawing.Point(2, 462);
             this.textBoxCommand.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxCommand.Name = "textBoxCommand";
-            this.textBoxCommand.Size = new System.Drawing.Size(486, 26);
+            this.textBoxCommand.Size = new System.Drawing.Size(666, 26);
             this.textBoxCommand.TabIndex = 2;
             this.textBoxCommand.TextChanged += new System.EventHandler(this.textBoxCommand_TextChanged);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
-            this.pictureBox1.Location = new System.Drawing.Point(705, 12);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlText;
+            this.pictureBox1.Location = new System.Drawing.Point(675, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(693, 512);
+            this.pictureBox1.Size = new System.Drawing.Size(826, 625);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(171, 422);
+            this.openButton.Location = new System.Drawing.Point(403, 11);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(124, 51);
+            this.openButton.Size = new System.Drawing.Size(85, 51);
             this.openButton.TabIndex = 5;
             this.openButton.Text = "Open";
             this.openButton.UseVisualStyleBackColor = true;
@@ -94,28 +94,28 @@ namespace ASEproject
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(534, 74);
+            this.runButton.Location = new System.Drawing.Point(403, 508);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(135, 67);
+            this.runButton.Size = new System.Drawing.Size(142, 121);
             this.runButton.TabIndex = 6;
-            this.runButton.Text = "runButton";
+            this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // multiTextBox
             // 
-            this.multiTextBox.Location = new System.Drawing.Point(39, 12);
+            this.multiTextBox.Location = new System.Drawing.Point(13, 74);
             this.multiTextBox.Multiline = true;
             this.multiTextBox.Name = "multiTextBox";
-            this.multiTextBox.Size = new System.Drawing.Size(486, 353);
+            this.multiTextBox.Size = new System.Drawing.Size(656, 359);
             this.multiTextBox.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1410, 542);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ClientSize = new System.Drawing.Size(1502, 631);
             this.Controls.Add(this.multiTextBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.runButton);

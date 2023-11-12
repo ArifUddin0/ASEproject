@@ -6,35 +6,27 @@ namespace aseTest
     [TestClass]
     public class aseTest
     {
-        [TestMethod]
-        public void moveto()
-        {
-            Pen pen = new Pen(Color.Black, 2); // Or another color and size
-            MyCanvass canvas = new MyCanvass(500, 500); // Adjustment of the canvas size
-
-            string command = "moveto 50 50";
-
-            MyCommandParser parser = new MyCommandParser(command, pen, canvas);
-
-            // Assert
-            // Check if the cursor moved to the expected position (50, 50)
-
-        }
 
         [TestMethod]
-        public void Circle_Test()
+        public void Rectangle_Test()
         {
-            Pen pen = new Pen(Color.Black, 2); // Or another color and size
-            MyCanvass canvas = new MyCanvass(500, 500); // Adjust the canvas size
+            Pen pen = new Pen(Color.Black, 2);
+            MyCanvass canvas = new MyCanvass(500, 500);
 
             string command = "circle 30";
 
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
-            // Assert
-            string[] parts = command.Split(' ');
-            Assert.IsTrue(parts.Length == 2 && parts[0] == "circle" && int.TryParse(parts[1], out _));
-        }
+            List<string> executedCommands = canvas.GetExecutedCommands();
 
+            Console.WriteLine("Executed Commands:");
+            foreach (string executedCommand in executedCommands)
+            {
+                Console.WriteLine(executedCommand);
+            }
+
+            Assert.IsTrue(executedCommands.Any(command => command.Contains("MyCircle")));
+        }
     }
+    
 }

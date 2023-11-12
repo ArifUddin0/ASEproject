@@ -1,6 +1,10 @@
 using System;
 using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 using ASEproject;
+using Moq;
+
 namespace aseTest
 {
     [TestClass]
@@ -40,11 +44,11 @@ namespace aseTest
         [TestMethod]
         public void Rectangle_Test()
         {
-            
+
             Pen pen = new Pen(Color.Red, 5);
             MyCanvass canvas = new MyCanvass(300, 350);
 
-            
+
             string command = "rectangle 30 40"; // Define a command to draw a rectangle
 
             // Executes the rectangle command
@@ -69,12 +73,12 @@ namespace aseTest
         [TestMethod]
         public void Triangle_Test()
         {
-            
+
             Pen pen = new Pen(Color.Green, 5);
             MyCanvass canvas = new MyCanvass(300, 350);
 
             // Defines a command to draw a triangle
-            string command = "triangle 30"; 
+            string command = "triangle 30";
 
             // Executes the triangle commands
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
@@ -97,9 +101,9 @@ namespace aseTest
         /// Test to verify the execution of commands when the run button is clicked.
         /// </summary>
         [TestMethod]
-        public void RunButtonExecution_Test()
+        public void RunButton_Test()
         {
-            
+
             Pen pen = new Pen(Color.Black, 2);
             MyCanvass canvas = new MyCanvass(500, 500);
 
@@ -121,6 +125,31 @@ namespace aseTest
             Assert.IsTrue(executedCommands.Count > 0, "No commands were executed on run button click.");
         }
 
+        [TestMethod]
+        public void MoveTo_Test()
+        {
+            // Arrange
+            Pen pen = new Pen(Color.Black, 2); // Set pen properties
+            MyCanvass canvas = new MyCanvass(500, 500); // Set up the canvas
+
+            int x = 50;
+            int y = 100;
+            string command = $"moveto {x} {y}";
+
+            MyCommandParser parser = new MyCommandParser(command, pen, canvas);
+
+            // Act
+            canvas.MoveTo(x, y); // Simulate cursor movement
+
+            // Assert
+            Point currentLocation = canvas.GetCurrentLocation();
+
+            Assert.AreEqual(new Point(x, y), currentLocation, "Cursor should move to the specified location");
+        }
+
+
+
+
+
     }
-    
 }

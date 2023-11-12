@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace ASEproject
         /// <summary>
         /// Event handler to save the commands written in the text boxes.
         /// </summary>
-        private void saveButton_Click(object sender, EventArgs e)
+        public void saveButton_Click(object sender, EventArgs e)
         {
             // Opens a 'Save File' dialog to choose a location to save the commands.
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
@@ -81,7 +82,7 @@ namespace ASEproject
         /// <summary>
         /// Event handler to open and load commands from a selected text file.
         /// </summary>
-        private void openButton_Click(object sender, EventArgs e)
+        public void openButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -281,9 +282,18 @@ namespace ASEproject
 
         }
 
-        
+        public MemoryStream GetSavedStream()
+        {
+            // Assuming you've saved the content into a MemoryStream named 'savedStream'
+            // Replace this with the actual stream where you save the content in your application.
+            // Ensure the stream is accessible or store it in a field in your form.
+            MemoryStream savedStream = new MemoryStream();
+            return savedStream;
+            // retrieve the stream containing the saved content.
 
-        
+            // Return the saved stream
+
+        }
     }
 }
 

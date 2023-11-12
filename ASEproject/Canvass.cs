@@ -17,6 +17,7 @@ namespace ASEproject
         private Graphics g;
         public Point p;
         private Bitmap myBitmap;
+        public Point currentLocation;
 
         /// <summary>
         /// Draws a shape on the canvas.
@@ -43,7 +44,8 @@ namespace ASEproject
         /// <param name="y">The Y-coordinate of the new position.</param>
         public void MoveTo(int x, int y)
         {
-            p = new Point(x, y);    
+            p = new Point(x, y);
+            currentLocation = p;
         }
         /// <summary>
         /// Clears the canvas, resetting it to a blank page.
@@ -90,7 +92,9 @@ namespace ASEproject
             return myBitmap;
         }
 
-        
-
+        public Point GetCurrentLocation()
+        {
+            return currentLocation;
+        }
     }
 }

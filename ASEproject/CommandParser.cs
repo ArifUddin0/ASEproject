@@ -20,13 +20,17 @@ namespace ASEproject
         /// <param name="command">The command to be processed.</param>
         /// <param name="pen">The pen used for drawing.</param>
         /// <param name="canvas">The canvas where the shapes are drawn.</param>
+        /// 
+        private string lastCommand; 
         public MyCommandParser(string command, Pen pen, MyCanvass canvas)
         {
+
             Console.WriteLine("Processing command: " + command);
                 string[] parts = command.Split(' ');
-                // Check the first part of the command to determine its type and process accordingly.
+                lastCommand = command;
+            // Check the first part of the command to determine its type and process accordingly.
 
-                if (parts[0] == "moveto")
+            if (parts[0] == "moveto")
                 {
                     int x = Int32.Parse(parts[1]);
                     int y = Int32.Parse(parts[2]);
@@ -80,6 +84,11 @@ namespace ASEproject
                  }
                 //draws a line from the selected points.
 
+        }
+
+        public string GetLastCommand()
+        {
+          return lastCommand;
         }
     }
 }

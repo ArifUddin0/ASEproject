@@ -69,20 +69,20 @@ namespace aseTest
         [TestMethod]
         public void Triangle_Test()
         {
-            // Create a pen and a canvas
+            
             Pen pen = new Pen(Color.Green, 5);
             MyCanvass canvas = new MyCanvass(300, 350);
 
-            // Define a command to draw a triangle
-            string command = "triangle 30"; // You might need additional parameters for triangle drawing
+            // Defines a command to draw a triangle
+            string command = "triangle 30"; 
 
-            // Execute the triangle command
+            // Executes the triangle commands
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
             // Get the list of executed commands
             List<string> executedCommands = canvas.GetExecutedCommands();
 
-            // Display the executed commands (for verification, can be removed in final implementation)
+            // Display the executed commands 
             Console.WriteLine("Executed Commands:");
             foreach (string executedCommand in executedCommands)
             {
@@ -90,7 +90,35 @@ namespace aseTest
             }
 
             // Assert that at least one command executed draws a triangle
-            Assert.IsTrue(executedCommands.Any(command => command.Contains("MyTriangle")), "A triangle should be drawn on executing the command.");
+            Assert.IsTrue(executedCommands.Any(command => command.Contains("MyTriangle")));
+        }
+
+        /// <summary>
+        /// Test to verify the execution of commands when the run button is clicked.
+        /// </summary>
+        [TestMethod]
+        public void RunButtonExecution_Test()
+        {
+            
+            Pen pen = new Pen(Color.Black, 2);
+            MyCanvass canvas = new MyCanvass(500, 500);
+
+            // Defines a set of commands separated by new lines as it would be entered into the multiTextBox
+            string command = "circle 30" + Environment.NewLine + "rectangle 50 20" + Environment.NewLine + "triangle 40";
+
+            // Emulate the button click and command processing
+            string[] commands = command.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var cmd in commands)
+            {
+                MyCommandParser parser = new MyCommandParser(cmd, pen, canvas);
+            }
+
+            // Get the list of executed commands
+            List<string> executedCommands = canvas.GetExecutedCommands();
+
+            // Assert that at least one command has been executed
+            Assert.IsTrue(executedCommands.Count > 0, "No commands were executed on run button click.");
         }
 
     }

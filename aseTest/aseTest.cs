@@ -125,12 +125,16 @@ namespace aseTest
             Assert.IsTrue(executedCommands.Count > 0, "No commands were executed on run button click.");
         }
 
+
+        /// <summary>
+        /// Tests wether or not the cursor has succesfully moved
+        /// </summary>
         [TestMethod]
         public void MoveTo_Test()
         {
-            // Arrange
-            Pen pen = new Pen(Color.Black, 2); // Set pen properties
-            MyCanvass canvas = new MyCanvass(500, 500); // Set up the canvas
+         
+            Pen pen = new Pen(Color.Red, 5); // Set pen properties
+            MyCanvass canvas = new MyCanvass(350, 300); // Set up the canvas
 
             int x = 50;
             int y = 100;
@@ -141,13 +145,28 @@ namespace aseTest
             // Act
             canvas.MoveTo(x, y); // Simulate cursor movement
 
-            // Assert
+            // Asserts the current location of the cursor if it has moved successfully.
             Point currentLocation = canvas.GetCurrentLocation();
 
             Assert.AreEqual(new Point(x, y), currentLocation, "Cursor should move to the specified location");
         }
 
+        [TestMethod]
+        public void DrawTo_Test()
+        {
+            // Arrange
+            var canvas = new MyCanvass(350, 300);
+            int startX = 10, startY = 10;
+            int endX = 50, endY = 50;
 
+            // Act
+            canvas.MoveTo(startX, startY);
+            canvas.DrawTo(endX, endY);
+
+            // Assert
+            var currentLocation = canvas.GetCurrentLocation();
+            Assert.AreEqual(new Point(endX, endY), currentLocation, "Cursor should move to the specified location");
+        }
 
 
 

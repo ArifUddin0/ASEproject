@@ -72,6 +72,7 @@ namespace ASEproject
             Pen myPen = new Pen(Color.Red, 5);
             g.DrawLine(myPen, p.X, p.Y, x, y);
             p = new Point(x, y);
+            currentLocation = p;
         }
         /// <summary>
         /// Initializes a new instance of the MyCanvass class with the specified width and height.
@@ -92,6 +93,10 @@ namespace ASEproject
             return myBitmap;
         }
 
+        /// <summary>
+        /// Gets the current location of cusrsor
+        /// </summary>
+        /// <returns></returns>
         public Point GetCurrentLocation()
         {
             return currentLocation;

@@ -142,7 +142,7 @@ namespace aseTest
 
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
-            // Act
+          
             canvas.MoveTo(x, y); // Simulate cursor movement
 
             // Asserts the current location of the cursor if it has moved successfully.
@@ -151,23 +151,44 @@ namespace aseTest
             Assert.AreEqual(new Point(x, y), currentLocation, "Cursor should move to the specified location");
         }
 
+        /// <summary>
+        /// Tests wether or not the cursor has drawn to a specific location
+        /// </summary>
+
         [TestMethod]
         public void DrawTo_Test()
         {
-            // Arrange
+            // Define initial and final coordinates for the line
             var canvas = new MyCanvass(350, 300);
             int startX = 10, startY = 10;
             int endX = 50, endY = 50;
 
-            // Act
+            // Move the cursor to the starting position
+            // Draw a line to the ending position
             canvas.MoveTo(startX, startY);
             canvas.DrawTo(endX, endY);
 
-            // Assert
+            // Check if the cursor is at the expected location
             var currentLocation = canvas.GetCurrentLocation();
             Assert.AreEqual(new Point(endX, endY), currentLocation, "Cursor should move to the specified location");
         }
 
+        [TestMethod]
+        public void Clear_Test()
+        {
+            // Arrange
+            Pen pen = new Pen(Color.Black, 2); // Or another color and size
+            MyCanvass canvas = new MyCanvass(500, 500); // Adjust the canvas size
+
+            // Act
+            canvas.MoveTo(50, 100); // Simulate cursor movement
+            canvas.DrawTo(100, 150); // Simulate drawing action
+            canvas.Clear(); // Simulate clear action
+
+            // Assert
+            List<string> executedCommands = canvas.GetExecutedCommands();
+            Assert.IsTrue(executedCommands.Count == 0, "Canvas should have no executed commands after clearing");
+        }
 
 
     }

@@ -206,8 +206,10 @@ namespace aseTest
 
             // gets the current location of the cursor to see if it has returned to 0,0
             Point currentLocation = canvas.GetCurrentLocation();
-            Assert.AreEqual(new Point(0, 0), currentLocation, "Cursor should reset to the original location");
+            Assert.AreEqual(new Point(0, 0), currentLocation, "Cursor should reset to the original location at 0,0");
         }
+
+
     
 
     }

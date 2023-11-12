@@ -13,6 +13,7 @@ namespace ASEproject
     /// </summary>
     public class MyCanvass
     {
+        private List<string> executedCommands = new List<string>();
         private Graphics g;
         public Point p;
         private Bitmap myBitmap;
@@ -24,6 +25,16 @@ namespace ASEproject
         public void DrawMyShape(MyShape shape)
         {
             shape.DrawMyShape(g, p);
+            executedCommands.Add(shape.ToString()); 
+            // Storing the command for now, assuming ToString() provides command details
+        }
+        /// <summary>
+        /// Retrives the executed commands
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetExecutedCommands()
+        {
+            return executedCommands;
         }
         /// <summary>
         /// Moves the drawing position to a specified location.

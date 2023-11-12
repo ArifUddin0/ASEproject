@@ -63,6 +63,36 @@ namespace aseTest
             // Assert that at least one command executed draws a rectangle
             Assert.IsTrue(executedCommands.Any(command => command.Contains("MyRectangle")));
         }
+        /// <summary>
+        /// Test to verify that a triangle command results in a triangle being drawn on the canvas.
+        /// </summary>
+        [TestMethod]
+        public void Triangle_Test()
+        {
+            // Create a pen and a canvas
+            Pen pen = new Pen(Color.Green, 5);
+            MyCanvass canvas = new MyCanvass(300, 350);
+
+            // Define a command to draw a triangle
+            string command = "triangle 30"; // You might need additional parameters for triangle drawing
+
+            // Execute the triangle command
+            MyCommandParser parser = new MyCommandParser(command, pen, canvas);
+
+            // Get the list of executed commands
+            List<string> executedCommands = canvas.GetExecutedCommands();
+
+            // Display the executed commands (for verification, can be removed in final implementation)
+            Console.WriteLine("Executed Commands:");
+            foreach (string executedCommand in executedCommands)
+            {
+                Console.WriteLine(executedCommand);
+            }
+
+            // Assert that at least one command executed draws a triangle
+            Assert.IsTrue(executedCommands.Any(command => command.Contains("MyTriangle")), "A triangle should be drawn on executing the command.");
+        }
+
     }
     
 }

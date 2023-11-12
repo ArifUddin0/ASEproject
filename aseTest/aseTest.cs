@@ -132,7 +132,7 @@ namespace aseTest
         [TestMethod]
         public void MoveTo_Test()
         {
-         
+
             Pen pen = new Pen(Color.Red, 5); // Set pen properties
             MyCanvass canvas = new MyCanvass(350, 300); // Set up the canvas
 
@@ -142,7 +142,7 @@ namespace aseTest
 
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
-          
+
             canvas.MoveTo(x, y); // Simulate cursor movement
 
             // Asserts the current location of the cursor if it has moved successfully.
@@ -172,24 +172,43 @@ namespace aseTest
             var currentLocation = canvas.GetCurrentLocation();
             Assert.AreEqual(new Point(endX, endY), currentLocation, "Cursor should move to the specified location");
         }
-
+        /// <summary>
+        /// Tests if the canvass has been cleared
+        /// </summary>
         [TestMethod]
         public void Clear_Test()
         {
-            // Arrange
-            Pen pen = new Pen(Color.Black, 2); // Or another color and size
-            MyCanvass canvas = new MyCanvass(500, 500); // Adjust the canvas size
 
-            // Act
-            canvas.MoveTo(50, 100); // Simulate cursor movement
-            canvas.DrawTo(100, 150); // Simulate drawing action
-            canvas.Clear(); // Simulate clear action
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(359, 300); // Adjust the canvas size
 
-            // Assert
+
+            canvas.MoveTo(50, 100); // Simulates the cursor movement
+            canvas.DrawTo(100, 150); // Simulates the drawing action
+            canvas.Clear(); // Simulates the clear action
+
+            // Gets the canvas commands which should now be empty
             List<string> executedCommands = canvas.GetExecutedCommands();
             Assert.IsTrue(executedCommands.Count == 0, "Canvas should have no executed commands after clearing");
         }
+        /// <summary>
+        /// Tests to see wether or not the cursor has been reset to 0,0
+        /// </summary>
+        [TestMethod]
+        public void Reset_CursorResetsToOriginalPosition()
+        {
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
 
+
+            canvas.MoveTo(50, 100); // Simulates the cursor movement
+            canvas.Reset(); // Simulatss thee reset action
+
+            // gets the current location of the cursor to see if it has returned to 0,0
+            Point currentLocation = canvas.GetCurrentLocation();
+            Assert.AreEqual(new Point(0, 0), currentLocation, "Cursor should reset to the original location");
+        }
+    
 
     }
 }

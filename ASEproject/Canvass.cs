@@ -18,7 +18,7 @@ namespace ASEproject
         public Point p;
         private Bitmap myBitmap;
         public Point currentLocation;
-        private Color currentPenColor;
+        private Color currentPenColor = Color.Red;
         /// <summary>
         /// Draws a shape on the canvas.
         /// </summary>
@@ -62,6 +62,7 @@ namespace ASEproject
         {
             MoveTo(0, 0);
         }
+       
         /// <summary>
         /// Draws a line from the current position to a specified point that you enter.
         /// </summary>
@@ -74,6 +75,7 @@ namespace ASEproject
             p = new Point(x, y);
             currentLocation = p;
         }
+
         /// <summary>
         /// Initializes a new instance of the MyCanvass class with the specified width and height.
         /// </summary>
@@ -83,6 +85,7 @@ namespace ASEproject
         {
             myBitmap= new Bitmap(width, height);
             g = Graphics.FromImage(myBitmap);
+
         }
         /// <summary>
         /// Gets the bitmap representation of the canvas.
@@ -101,9 +104,6 @@ namespace ASEproject
         {
             return currentLocation;
         }
-        public void SetCurrentPenColor(Color color)
-        {
-            currentPenColor = color;
-        }
+       
     }
 }

@@ -209,8 +209,31 @@ namespace aseTest
             Assert.AreEqual(new Point(0, 0), currentLocation, "Cursor should reset to the original location at 0,0");
         }
 
+        /// <summary>
+        /// This tests to confirm wether or not the pens color has changed successfully.
+        /// </summary>
+        [TestMethod]
+        public void ChangePenColor_Test()
+        {
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
 
-    
+            // Define a command to change the pen color to blue
+            string command = "colour blue"; 
+
+            // Execute the color command
+            MyCommandParser parser = new MyCommandParser(command, pen, canvas);
+
+            // Get the pen color after the command is executed
+            Color updatedPenColor = pen.Color;
+
+            // Assert that the pen color has been changed successfully to blue
+            Assert.AreEqual(Color.Blue, updatedPenColor, "Pen color should be changed to blue.");
+        }
+
+
+
+
 
     }
 }

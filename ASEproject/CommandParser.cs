@@ -90,6 +90,13 @@ namespace ASEproject
             }
 
         }
+
+
+        /// <summary>
+        /// Handles the 'colour' command to set the pen color based on the specified color name.
+        /// </summary>
+        /// <param name="parts">The array of command parts.</param>
+        /// <param name="pen">The Pen object whose color will be set.</param>
         private void HandleColorCommand(string[] parts, Pen pen)
         {
             if (parts.Length > 1)
@@ -109,9 +116,12 @@ namespace ASEproject
                         Console.WriteLine($"Invalid color: {parts[1]}");
                         break;
                 }
+                
             }
-            
+
+           
         }
+
 
         public string GetLastCommand()
         {

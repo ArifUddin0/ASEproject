@@ -20,6 +20,7 @@ namespace ASEproject
         /// <summary>
         /// Constructor for the main form.
         /// </summary>
+        
         public Form1()
         {
             InitializeComponent(); // Initializes the form component
@@ -235,7 +236,7 @@ namespace ASEproject
 
 
                             default:
-                                validationResults.AppendLine("Unrecognized command");
+                                validationResults.AppendLine(" ");
                                 break;
                         }
                     }

@@ -17,7 +17,6 @@ namespace ASEproject
        /// </summary>
         protected int myRadius;
 
-
         /// <summary>
         /// Draws the circle on the graphics context at the specified position.
         /// </summary>

@@ -82,10 +82,35 @@ namespace ASEproject
                     int y = Int32.Parse(parts[2]);
                     canvas.DrawTo(x, y);
                  }
-                //draws a line from the selected points.
-                 
+            //draws a line from the selected points.
 
+            else if (parts[0] == "colour")
+            {
+                HandleColorCommand(parts, pen);
+            }
 
+        }
+        private void HandleColorCommand(string[] parts, Pen pen)
+        {
+            if (parts.Length > 1)
+            {
+                switch (parts[1].ToLower())
+                {
+                    case "blue":
+                        pen.Color = Color.Blue;
+                        break;
+                    case "green":
+                        pen.Color = Color.Green;
+                        break;
+                    case "yellow":
+                        pen.Color = Color.Yellow;
+                        break;
+                    default:
+                        Console.WriteLine($"Invalid color: {parts[1]}");
+                        break;
+                }
+            }
+            
         }
 
         public string GetLastCommand()

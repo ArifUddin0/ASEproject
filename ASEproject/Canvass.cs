@@ -18,7 +18,7 @@ namespace ASEproject
         public Point p;
         private Bitmap myBitmap;
         public Point currentLocation;
-
+        private Color currentPenColor;
         /// <summary>
         /// Draws a shape on the canvas.
         /// </summary>
@@ -69,7 +69,7 @@ namespace ASEproject
         /// <param name="y">The Y-coordinate of the end point.</param>
         public void DrawTo(int x, int y)
         {
-            Pen myPen = new Pen(Color.Red, 5);
+            Pen myPen = new Pen(currentPenColor, 5);
             g.DrawLine(myPen, p.X, p.Y, x, y);
             p = new Point(x, y);
             currentLocation = p;
@@ -100,6 +100,10 @@ namespace ASEproject
         public Point GetCurrentLocation()
         {
             return currentLocation;
+        }
+        public void SetCurrentPenColor(Color color)
+        {
+            currentPenColor = color;
         }
     }
 }

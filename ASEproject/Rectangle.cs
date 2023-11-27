@@ -10,7 +10,7 @@ namespace ASEproject
     /// </summary>
     ///inherits properties from shape.cs
     /// </summary>
-    public class MyRectangle:MyShape ///inherits properties from shape.cs
+    public class MyRectangle:MyShape 
     {
         /// </summary>
         /// The height and width of the rectangle

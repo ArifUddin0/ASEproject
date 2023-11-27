@@ -195,7 +195,7 @@ namespace aseTest
         /// Tests to see wether or not the cursor has been reset to 0,0
         /// </summary>
         [TestMethod]
-        public void Reset_CursorResetsToOriginalPosition()
+        public void Reset_Test()
         {
             Pen pen = new Pen(Color.Red, 5);
             MyCanvass canvas = new MyCanvass(350, 300);

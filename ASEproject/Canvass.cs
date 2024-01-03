@@ -87,6 +87,11 @@ namespace ASEproject
             g = Graphics.FromImage(myBitmap);
 
         }
+
+        public MyCanvass()
+        {
+        }
+
         /// <summary>
         /// Gets the bitmap representation of the canvas.
         /// </summary>
@@ -104,6 +109,9 @@ namespace ASEproject
         {
             return currentLocation;
         }
-       
+        public void SetCurrentPenColor(Color color)
+        {
+             currentPenColor = color;
+        }
     }
 }

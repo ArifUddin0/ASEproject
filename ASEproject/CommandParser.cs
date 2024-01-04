@@ -43,6 +43,7 @@ namespace ASEproject
 
             else if (parts[0] == "circle")
             {
+                
                 if (parts.Length == 2)
                 {
                     int radius = ifVariableOrValue(parts[1]);
@@ -53,16 +54,7 @@ namespace ASEproject
                 {
                     Console.WriteLine("Invalid 'circle' command syntax.");
                 }
-            }
-            else if (parts[0] == "vars")
-            {
-               foreach (KeyValuePair<string, int> kvp in variables)
-                { Console.WriteLine("key = {0}, Value = {1}", kvp.Key, kvp.Value); 
-
-                }
-
-               
-
+                
             }
 
 
@@ -118,7 +110,57 @@ namespace ASEproject
             {
                 HandleVariableAssignment(parts);
             }
+
+            else if (parts[0] == "repeat")
+            {
+                HandleRepeatCommand(parts, pen, canvas);
+            }
         }
+        private void HandleRepeatCommand(string[] parts, Pen pen, MyCanvass canvas)
+        {
+            if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
+            {
+                int size1 = ifVariableOrValue(parts[3]);
+
+                for (int i = 0; i < repeatCount; i++)
+                {
+                    int newX = canvas.GetCurrentLocation().X + i * 5; 
+                    int newY = canvas.GetCurrentLocation().Y + i * 5; 
+                    canvas.MoveTo(newX, newY);
+
+                    if (parts[2].ToLower() == "circle")
+                    {
+                        MyShape circle = new MyCircle(pen.Color, newX, newY, size1);
+                        canvas.DrawMyShape(circle);
+                    }
+                    else if (parts[2].ToLower() == "rectangle")
+                    {
+                        if (parts.Length >= 5)
+                        {
+                            int size2 = ifVariableOrValue(parts[4]);
+                            MyShape rectangle = new MyRectangle(pen.Color, newX, newY, size1, size2);
+                            canvas.DrawMyShape(rectangle);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid 'repeat' command syntax for rectangle.");
+                        }
+                    }
+                    else if (parts[2].ToLower() == "triangle" && parts.Length >= 5)
+                    {
+                        int size2 = ifVariableOrValue(parts[4]);
+                        MyShape triangle = new MyTriangle(pen.Color, newX, newY, size1);
+                        canvas.DrawMyShape(triangle);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid 'repeat' command syntax.");
+            }
+        }
+
+
         private int ifVariableOrValue(string variableOrValue)
         {
             Console.WriteLine($"Checking variable or value: {variableOrValue}");

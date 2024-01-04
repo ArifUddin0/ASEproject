@@ -26,6 +26,7 @@ namespace ASEproject
         public MyCommandParser(string command, Pen pen, MyCanvass canvas)
         {
 
+
             Console.WriteLine("Processing command: " + command);
                 string[] parts = command.Split(' ');
                 lastCommand = command;
@@ -53,20 +54,36 @@ namespace ASEproject
                     Console.WriteLine("Invalid 'circle' command syntax.");
                 }
             }
+            else if (parts[0] == "vars")
+            {
+               foreach (KeyValuePair<string, int> kvp in variables)
+                { Console.WriteLine("key = {0}, Value = {1}", kvp.Key, kvp.Value); 
+
+                }
+
+               
+
+            }
 
 
             // draws a circle on the output.
 
             else if (parts[0] == "rectangle")
+            {
+                if (parts.Length == 3)
                 {
-                int height = Int32.Parse(parts[1]);
-                int width = Int32.Parse(parts[2]);
-                MyShape rectangle = new MyRectangle(pen.Color, 15, 15, height, width);
-                canvas.DrawMyShape(rectangle);
-
-                 }
-                // draws a rectangle on the output.
-                else if (parts[0] == "triangle")
+                    int width = ifVariableOrValue(parts[1]);
+                    int height = ifVariableOrValue(parts[2]);
+                    MyShape rectangle = new MyRectangle(pen.Color, 15, 15, width, height);
+                    canvas.DrawMyShape(rectangle);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid 'rectangle' command syntax.");
+                }
+            }
+            // draws a rectangle on the output.
+            else if (parts[0] == "triangle")
                 {
                 int sideLength = Int32.Parse(parts[1]);
                 MyShape triangle = new MyTriangle(pen.Color, 15, 15, sideLength);
@@ -103,41 +120,42 @@ namespace ASEproject
             }
         }
         private int ifVariableOrValue(string variableOrValue)
-{
-    Console.WriteLine($"Checking variable or value: {variableOrValue}");
+        {
+            Console.WriteLine($"Checking variable or value: {variableOrValue}");
 
-    string key = variableOrValue.ToLower();  // Convert to lowercase for case-insensitive comparison
+           // string key = variableOrValue.ToLower();  // Convert to lowercase for case-insensitive comparison
 
-    Console.WriteLine($"Lowercased key: {key}");
+           // Console.WriteLine($"Lowercased key: {key}");
 
-    // Check if the key is a variable
-    if (variables.ContainsKey(key))
-    {
-        Console.WriteLine($"Found variable: {variables[key]}");
-        return variables[key];
-    }
+            if (Int32.TryParse(variableOrValue, out int value))
+            {
+                Console.WriteLine($"Parsed as integer: {value}");
+                return value;
+            }
+          //  else if (variables.ContainsKey(key))
+          //  {
+           //     Console.WriteLine($"Found variable: {variables[key]}");
+           //     return variables[key];
+          //  }
+            else
+            {
+                Console.WriteLine($"Variable or value not found: {variableOrValue}");
+                return 0; // or any other default value you want to assign
+            }
+        }
 
-    // If not a variable, try parsing as an integer
-    if (Int32.TryParse(variableOrValue, out int value))
-    {
-        Console.WriteLine($"Parsed as integer: {value}");
-        return value;
-    }
 
-    Console.WriteLine($"Variable or value not found: {variableOrValue}");
-    return 0; // or any other default value you want to assign
-}
 
         private void HandleVariableAssignment(string[] parts)
         {
             Console.WriteLine($"Handling variable assignment. Parts: {string.Join(", ", parts)}");
 
-            if (parts.Length == 4 && parts[2].ToLower() == "equal")
+            if (parts.Length == 4 && parts[2].ToLower() == "equals")
             {
-                string variableName = parts[1].ToLower();  // Convert to lowercase for consistent handling
+                string variableName = parts[1];  // Do not convert to lowercase
                 int value = Int32.Parse(parts[3]);
 
-                Console.WriteLine($"Variable name: {variableName}, Value: {value}");
+                //Console.WriteLine($"Variable name: {variableName}, Value: {value}");
 
                 if (variables.ContainsKey(variableName))
                 {
@@ -148,14 +166,13 @@ namespace ASEproject
                     variables.Add(variableName, value);
                 }
 
-                Console.WriteLine($"Variable '{variableName}' assigned the value {value}");
+                //Console.WriteLine($"Variable '{variableName}' assigned the value {value}");
             }
             else
             {
-                Console.WriteLine("Invalid variable assignment syntax.");
+               // Console.WriteLine("Invalid variable assignment syntax.");
             }
         }
-
 
         /// <summary>
         /// Handles the 'colour' command to set the pen color based on the specified color name.

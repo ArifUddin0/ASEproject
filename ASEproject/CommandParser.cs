@@ -43,7 +43,6 @@ namespace ASEproject
 
             else if (parts[0] == "circle")
             {
-                
                 if (parts.Length == 2)
                 {
                     int radius = ifVariableOrValue(parts[1]);
@@ -116,6 +115,13 @@ namespace ASEproject
                 HandleRepeatCommand(parts, pen, canvas);
             }
         }
+
+        /// <summary>
+        /// Handles the 'repeat' command to loop the shapes multiple times on the canvas.
+        /// </summary>
+        /// <param name="parts">The array of command parts.</param>
+        /// <param name="pen">The Pen object used for drawing.</param>
+        /// <param name="canvas">The canvas where the shapes are drawn.</param>
         private void HandleRepeatCommand(string[] parts, Pen pen, MyCanvass canvas)
         {
             if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))

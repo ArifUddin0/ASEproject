@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -107,22 +108,21 @@ namespace ASEproject
             }
             else if (parts[0] == "let")
             {
-                // HandleVariableAssignment(parts);
                 Console.WriteLine("let called");
                 string name = parts[1];
-                if (!Int32.TryParse(parts[3], out int value))
+                string expression = string.Join(" ", parts.Skip(3));
+
+                if (TryEvaluateExpression(expression, out int value))
                 {
-                    Console.WriteLine("Value not assigned to" + name);
+                    variables[name] = value;
                 }
-                variables[name] = value;
+                else
+                {
+                    Console.WriteLine($"Error evaluating expression for variable {name}");
+                }
             }
-            else if (parts[0] == "vars")
-            {
-                Console.WriteLine("vars called");
-                foreach (var item in variables)
-                { Console.WriteLine(item); }
-            }
-        
+
+
 
             else if (parts[0] == "repeat")
             {
@@ -142,17 +142,19 @@ namespace ASEproject
         {
             // Checking for valid amount of parts in command
             if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
-            {
-                    //size for the command -example - circle 10
-                    int size1 = ifVariableOrValue(parts[3]);
+            {  
 
+                //size for the command -example - circle 10
+                int size1 = ifVariableOrValue(parts[3]);
                 //repeats the loop -example - repeat 5 (repeats it 5 times)
-                for (int i = 0; i < repeatCount; i++)
+
+                for (int i = 0; i < repeatCount ; i++)
                 {
                     //changes position on canvass so you can see the shapes loop poeprly 
                     int newX = canvas.GetCurrentLocation().X + i * 5; 
                     int newY = canvas.GetCurrentLocation().Y + i * 5; 
                     canvas.MoveTo(newX, newY);
+                    
 
                     if (parts[2].ToLower() == "circle")
                     {
@@ -175,6 +177,7 @@ namespace ASEproject
                         MyShape triangle = new MyTriangle(pen.Color, newX, newY, size1);
                         canvas.DrawMyShape(triangle);
                     }
+
                 }
             }
             else
@@ -182,8 +185,12 @@ namespace ASEproject
                 Console.WriteLine("Invalid 'repeat' command syntax.");
             }
         }
-
-
+     
+        /// <summary>
+        /// Determines whether or not the input is a variable name or a numerical value and retrieves the corresponding value from the variables dictionary.
+        /// </summary>
+        /// <param name="variableOrValue">The input string representing either a variable name or a numerical value.</param>
+        /// <returns>The value corresponding to the variable name or the parsed numerical value.</returns>
         private int ifVariableOrValue(string variableOrValue)
         {
             if (variables.ContainsKey(variableOrValue))
@@ -200,7 +207,10 @@ namespace ASEproject
         }
 
 
-
+        /// <summary>
+        /// Handles the let command for variable assignment, updating the variables dictionary - let x equals 10
+        /// </summary>
+        /// <param name="parts">The array of command parts.</param>
         private void HandleVariableAssignment(string[] parts)
         {
 
@@ -209,7 +219,7 @@ namespace ASEproject
                 string variableName = parts[1];  // Do not convert to lowercase
                 int value = Int32.Parse(parts[3]);
 
-
+                // Updatse the variables dictionary with the assigned value that was inpputed in
                 if (variables.ContainsKey(variableName))
                 {
                     variables[variableName] = value;
@@ -251,6 +261,32 @@ namespace ASEproject
 
            
         }
+        
+        private bool TryEvaluateExpression(string expression, out int result)
+        {
+            result = 0;
+
+            foreach (var variable in variables)
+            {
+                expression = expression.Replace(variable.Key, variable.Value.ToString());
+            }
+
+            
+            expression = expression.Replace("*", " * ");
+
+            DataTable dt = new DataTable();
+
+            try
+            {
+                result = Convert.ToInt32(dt.Compute(expression, ""));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        
+    }
 
 
         public string GetLastCommand()
@@ -259,5 +295,7 @@ namespace ASEproject
         }
         //returns the last command
     }
+    
+
 }
 

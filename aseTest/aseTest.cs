@@ -261,19 +261,19 @@ namespace aseTest
             Assert.IsTrue(executedCommands.TrueForAll(command => command.Contains("MyCircle")), "All executed commands should be circles.");
         }
         /// <summary>
-        /// Test to verify that a variable is assigned successfully.
+        /// Test to verify that a variable is assigned successfully to a number
         /// </summary>
         [TestMethod]
         public void VariableAssignment_Test()
         {
-            // Set up initial conditions
+            
             Pen pen = new Pen(Color.Red, 5);
             MyCanvass canvas = new MyCanvass(350, 300);
 
-            // Define a command to assign a value to a variable
+            // Defines a command that will assign a value to the variable s
             string command = "let x equals 10";
 
-            // Execute the command
+            // Executes the given command
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
             // Get the list of executed commands
@@ -286,15 +286,9 @@ namespace aseTest
                 Console.WriteLine(executedCommand);
             }
 
-            // Assert that the variable assignment command has been executed
-        //    Assert.IsTrue(executedCommands.Any(command => command.Contains("let x equals 10")), "Variable assignment command should be executed.");
-
-            // You can also check the state of the variables dictionary in MyCommandParser
+            // Checks the dictionary to see the variables assigned 
             Assert.IsTrue(MyCommandParser.variables.ContainsKey("x"), "Variable 'x' should be in the variables dictionary.");
             Assert.AreEqual(10, MyCommandParser.variables["x"], "Variable 'x' should have the value 10.");
         }
     }
 }
-
-    
-

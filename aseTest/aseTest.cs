@@ -232,37 +232,33 @@ namespace aseTest
         }
 
         /// <summary>
-        /// Test to confirm that the 'repeat' command correctly draws shapes on the canvas.
+        /// This tests checks wether ir not a shape has repeatedly drawn itself on the canvass
         /// </summary>
         [TestMethod]
         public void Repeat_Test()
         {
-            Pen pen = new Pen(Color.Black, 2);
-            MyCanvass canvas = new MyCanvass(500, 500);
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
 
-            // Define a repeat command to draw circles with a radius of 30, repeated 3 times
+            // Defines a command for repeat to repeat 3 circles with a radius of 30 on them
             string command = "repeat 3 circle 30";
 
-            // Execute the repeat command
+            // Executes the command for repeat
             MyCommandParser parser = new MyCommandParser(command, pen, canvas);
 
             // Get the list of executed commands
             List<string> executedCommands = canvas.GetExecutedCommands();
 
-            // Display the executed commands 
+            // Displays the executed commands 
             Console.WriteLine("Executed Commands:");
             foreach (string executedCommand in executedCommands)
             {
                 Console.WriteLine(executedCommand);
             }
 
-            // Assert that at least three commands were executed, each drawing a circle
+            // Check if there is atleast three commands that were executed each drawing a circle
             Assert.AreEqual(3, executedCommands.Count, "Expected 3 circles to be drawn.");
             Assert.IsTrue(executedCommands.TrueForAll(command => command.Contains("MyCircle")), "All executed commands should be circles.");
         }
     }
 }
-
-
-
-    

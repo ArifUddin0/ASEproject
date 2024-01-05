@@ -22,23 +22,23 @@ namespace ASEproject
         /// <param name="canvas">The canvas where the shapes are drawn.</param>
         /// 
         private string lastCommand;
-        private Dictionary<string, int> variables = new Dictionary<string, int>();
+        public static Dictionary<string, int> variables = new Dictionary<string, int>();
         public MyCommandParser(string command, Pen pen, MyCanvass canvas)
         {
 
 
             Console.WriteLine("Processing command: " + command);
-                string[] parts = command.Split(' ');
-                lastCommand = command;
+            string[] parts = command.Split(' ');
+            lastCommand = command;
             // Check the first part of the command to determine its type and process accordingly.
 
             if (parts[0] == "moveto")
-                {
-                    int x = Int32.Parse(parts[1]);
-                    int y = Int32.Parse(parts[2]);
-                    canvas.MoveTo(x, y);
+            {
+                int x = Int32.Parse(parts[1]);
+                int y = Int32.Parse(parts[2]);
+                canvas.MoveTo(x, y);
 
-                }
+            }
             // moves the cursor to the selected location
 
             else if (parts[0] == "circle")
@@ -53,7 +53,7 @@ namespace ASEproject
                 {
                     Console.WriteLine("Invalid 'circle' command syntax.");
                 }
-                
+
             }
 
 
@@ -75,30 +75,30 @@ namespace ASEproject
             }
             // draws a rectangle on the output.
             else if (parts[0] == "triangle")
-                {
+            {
                 int sideLength = Int32.Parse(parts[1]);
                 MyShape triangle = new MyTriangle(pen.Color, 15, 15, sideLength);
                 canvas.DrawMyShape(triangle);
 
-                 }
-                //draws a triangle on the output.
+            }
+            //draws a triangle on the output.
 
-                 else if (parts[0] == "clear")
-                    {
-                    canvas.Clear();
-                 }
-                //clears any drawings from the output - fresh sheet.
-                else if (parts[0] == "reset")
-                {
-                    canvas.Reset();
-                  }
-                //resets the cursor to 0,0.
-                else if (parts[0] == "drawto")
-                {
-                    int x = Int32.Parse(parts[1]);
-                    int y = Int32.Parse(parts[2]);
-                    canvas.DrawTo(x, y);
-                 }
+            else if (parts[0] == "clear")
+            {
+                canvas.Clear();
+            }
+            //clears any drawings from the output - fresh sheet.
+            else if (parts[0] == "reset")
+            {
+                canvas.Reset();
+            }
+            //resets the cursor to 0,0.
+            else if (parts[0] == "drawto")
+            {
+                int x = Int32.Parse(parts[1]);
+                int y = Int32.Parse(parts[2]);
+                canvas.DrawTo(x, y);
+            }
             //draws a line from the selected points.
 
             else if (parts[0] == "colour")
@@ -107,12 +107,28 @@ namespace ASEproject
             }
             else if (parts[0] == "let")
             {
-                HandleVariableAssignment(parts);
+                // HandleVariableAssignment(parts);
+                Console.WriteLine("let called");
+                string name = parts[1];
+                if (!Int32.TryParse(parts[3], out int value))
+                {
+                    Console.WriteLine("Value not assigned to" + name);
+                }
+                variables[name] = value;
             }
+            else if (parts[0] == "vars")
+            {
+                Console.WriteLine("vars called");
+                foreach (var item in variables)
+                { Console.WriteLine(item); }
+            }
+        
 
             else if (parts[0] == "repeat")
             {
+
                 HandleRepeatCommand(parts, pen, canvas);
+
             }
         }
 
@@ -124,12 +140,16 @@ namespace ASEproject
         /// <param name="canvas">The canvas where the shapes are drawn.</param>
         private void HandleRepeatCommand(string[] parts, Pen pen, MyCanvass canvas)
         {
+            // Checking for valid amount of parts in command
             if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
             {
+                //size for the command -example - circle 10
                 int size1 = ifVariableOrValue(parts[3]);
 
+                //repeats the loop -example - repeat 5 (repeats it 5 times)
                 for (int i = 0; i < repeatCount; i++)
                 {
+                    //changes position on canvass so you can see the shapes loop poeprly 
                     int newX = canvas.GetCurrentLocation().X + i * 5; 
                     int newY = canvas.GetCurrentLocation().Y + i * 5; 
                     canvas.MoveTo(newX, newY);
@@ -169,26 +189,16 @@ namespace ASEproject
 
         private int ifVariableOrValue(string variableOrValue)
         {
-            Console.WriteLine($"Checking variable or value: {variableOrValue}");
-
-           // string key = variableOrValue.ToLower();  // Convert to lowercase for case-insensitive comparison
-
-           // Console.WriteLine($"Lowercased key: {key}");
-
-            if (Int32.TryParse(variableOrValue, out int value))
-            {
-                Console.WriteLine($"Parsed as integer: {value}");
-                return value;
+            if (variables.ContainsKey(variableOrValue))
+            { return variables[variableOrValue];
             }
-          //  else if (variables.ContainsKey(key))
-          //  {
-           //     Console.WriteLine($"Found variable: {variables[key]}");
-           //     return variables[key];
-          //  }
+            else if (Int32.TryParse(variableOrValue, out int value))
+                {  return value; 
+            }
             else
             {
                 Console.WriteLine($"Variable or value not found: {variableOrValue}");
-                return 0; // or any other default value you want to assign
+                return 0; 
             }
         }
 
@@ -196,14 +206,12 @@ namespace ASEproject
 
         private void HandleVariableAssignment(string[] parts)
         {
-            Console.WriteLine($"Handling variable assignment. Parts: {string.Join(", ", parts)}");
 
             if (parts.Length == 4 && parts[2].ToLower() == "equals")
             {
                 string variableName = parts[1];  // Do not convert to lowercase
                 int value = Int32.Parse(parts[3]);
 
-                //Console.WriteLine($"Variable name: {variableName}, Value: {value}");
 
                 if (variables.ContainsKey(variableName))
                 {
@@ -214,11 +222,6 @@ namespace ASEproject
                     variables.Add(variableName, value);
                 }
 
-                //Console.WriteLine($"Variable '{variableName}' assigned the value {value}");
-            }
-            else
-            {
-               // Console.WriteLine("Invalid variable assignment syntax.");
             }
         }
 

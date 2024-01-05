@@ -260,5 +260,41 @@ namespace aseTest
             Assert.AreEqual(3, executedCommands.Count, "Expected 3 circles to be drawn.");
             Assert.IsTrue(executedCommands.TrueForAll(command => command.Contains("MyCircle")), "All executed commands should be circles.");
         }
+        /// <summary>
+        /// Test to verify that a variable is assigned successfully.
+        /// </summary>
+        [TestMethod]
+        public void VariableAssignment_Test()
+        {
+            // Set up initial conditions
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
+
+            // Define a command to assign a value to a variable
+            string command = "let x equals 10";
+
+            // Execute the command
+            MyCommandParser parser = new MyCommandParser(command, pen, canvas);
+
+            // Get the list of executed commands
+            List<string> executedCommands = canvas.GetExecutedCommands();
+
+            // Display the executed commands 
+            Console.WriteLine("Executed Commands:");
+            foreach (string executedCommand in executedCommands)
+            {
+                Console.WriteLine(executedCommand);
+            }
+
+            // Assert that the variable assignment command has been executed
+        //    Assert.IsTrue(executedCommands.Any(command => command.Contains("let x equals 10")), "Variable assignment command should be executed.");
+
+            // You can also check the state of the variables dictionary in MyCommandParser
+            Assert.IsTrue(MyCommandParser.variables.ContainsKey("x"), "Variable 'x' should be in the variables dictionary.");
+            Assert.AreEqual(10, MyCommandParser.variables["x"], "Variable 'x' should have the value 10.");
+        }
     }
 }
+
+    
+

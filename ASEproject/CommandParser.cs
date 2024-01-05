@@ -143,8 +143,8 @@ namespace ASEproject
             // Checking for valid amount of parts in command
             if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
             {
-                //size for the command -example - circle 10
-                int size1 = ifVariableOrValue(parts[3]);
+                    //size for the command -example - circle 10
+                    int size1 = ifVariableOrValue(parts[3]);
 
                 //repeats the loop -example - repeat 5 (repeats it 5 times)
                 for (int i = 0; i < repeatCount; i++)
@@ -167,10 +167,7 @@ namespace ASEproject
                             MyShape rectangle = new MyRectangle(pen.Color, newX, newY, size1, size2);
                             canvas.DrawMyShape(rectangle);
                         }
-                        else
-                        {
-                            Console.WriteLine("Invalid 'repeat' command syntax for rectangle.");
-                        }
+                        
                     }
                     else if (parts[2].ToLower() == "triangle" && parts.Length >= 5)
                     {

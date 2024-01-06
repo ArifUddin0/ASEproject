@@ -290,5 +290,28 @@ namespace aseTest
             Assert.IsTrue(MyCommandParser.variables.ContainsKey("x"), "Variable 'x' should be in the variables dictionary.");
             Assert.AreEqual(10, MyCommandParser.variables["x"], "Variable 'x' should have the value 10.");
         }
+
+        /// <summary>
+        /// Tests to verify wether or not the execution of an expression has happened 
+        /// </summary>
+        [TestMethod]
+        public void Expression_Test()
+        {
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
+
+            // Assigns a value to the variable counts
+            string command1 = "let count equals 5";
+            MyCommandParser parser1 = new MyCommandParser(command1, pen, canvas);
+
+            // Defines an expression that uses the variable count
+            string command2 = "let size equals count * 10";
+            MyCommandParser parser2 = new MyCommandParser(command2, pen, canvas);
+
+            // checks if that the variable size has the correct value after the expression is executed
+            Assert.IsTrue(MyCommandParser.variables.ContainsKey("size"), "Variable 'size' should be in the variables dictionary.");
+            Assert.AreEqual(50, MyCommandParser.variables["size"], "Variable 'size' should have the value 50.");
+        }
+
     }
 }

@@ -141,43 +141,76 @@ namespace ASEproject
         private void HandleRepeatCommand(string[] parts, Pen pen, MyCanvass canvas)
         {
             // Checking for valid amount of parts in command
-            if (parts.Length >= 4 && int.TryParse(parts[1], out int repeatCount) && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
-            {  
-
-                //size for the command -example - circle 10
+            if (parts.Length >= 4 && (parts[2].ToLower() == "circle" || parts[2].ToLower() == "rectangle" || parts[2].ToLower() == "triangle"))
+            {
                 int size1 = ifVariableOrValue(parts[3]);
-                //repeats the loop -example - repeat 5 (repeats it 5 times)
 
-                for (int i = 0; i < repeatCount ; i++)
+                if (int.TryParse(parts[1], out int repeatCount))
                 {
-                    //changes position on canvass so you can see the shapes loop poeprly 
-                    int newX = canvas.GetCurrentLocation().X + i * 5; 
-                    int newY = canvas.GetCurrentLocation().Y + i * 5; 
-                    canvas.MoveTo(newX, newY);
-                    
+                    //repeats the loop -example - repeat 5 (repeats it 5 times)
+                    for (int i = 0; i < repeatCount; i++)
+                    {
+                        int newX = canvas.GetCurrentLocation().X + i * 5;
+                        int newY = canvas.GetCurrentLocation().Y + i * 5;
+                        canvas.MoveTo(newX, newY);
 
-                    if (parts[2].ToLower() == "circle")
-                    {
-                        MyShape circle = new MyCircle(pen.Color, newX, newY, size1);
-                        canvas.DrawMyShape(circle);
-                    }
-                    else if (parts[2].ToLower() == "rectangle")
-                    {
-                        if (parts.Length >= 5)
+                        if (parts[2].ToLower() == "circle")
+                        {
+                            MyShape circle = new MyCircle(pen.Color, newX, newY, size1);
+                            canvas.DrawMyShape(circle);
+                        }
+                        else if (parts[2].ToLower() == "rectangle")
+                        {
+                            if (parts.Length >= 5)
+                            {
+                                int size2 = ifVariableOrValue(parts[4]);
+                                MyShape rectangle = new MyRectangle(pen.Color, newX, newY, size1, size2);
+                                canvas.DrawMyShape(rectangle);
+                            }
+                        }
+                        else if (parts[2].ToLower() == "triangle" && parts.Length >= 5)
                         {
                             int size2 = ifVariableOrValue(parts[4]);
-                            MyShape rectangle = new MyRectangle(pen.Color, newX, newY, size1, size2);
-                            canvas.DrawMyShape(rectangle);
+                            MyShape triangle = new MyTriangle(pen.Color, newX, newY, size1);
+                            canvas.DrawMyShape(triangle);
                         }
-                        
                     }
-                    else if (parts[2].ToLower() == "triangle" && parts.Length >= 5)
+                }
+                else if (variables.ContainsKey(parts[1]))
+                {
+                    // If the loop count is a variable eg. repeat x amount of times
+                    int loopCount = variables[parts[1]];
+                    for (int i = 0; i < loopCount; i++)
                     {
-                        int size2 = ifVariableOrValue(parts[4]);
-                        MyShape triangle = new MyTriangle(pen.Color, newX, newY, size1);
-                        canvas.DrawMyShape(triangle);
-                    }
+                        int newX = canvas.GetCurrentLocation().X + i * 5;
+                        int newY = canvas.GetCurrentLocation().Y + i * 5;
+                        canvas.MoveTo(newX, newY);
 
+                        if (parts[2].ToLower() == "circle")
+                        {
+                            MyShape circle = new MyCircle(pen.Color, newX, newY, size1);
+                            canvas.DrawMyShape(circle);
+                        }
+                        else if (parts[2].ToLower() == "rectangle")
+                        {
+                            if (parts.Length >= 5)
+                            {
+                                int size2 = ifVariableOrValue(parts[4]);
+                                MyShape rectangle = new MyRectangle(pen.Color, newX, newY, size1, size2);
+                                canvas.DrawMyShape(rectangle);
+                            }
+                        }
+                        else if (parts[2].ToLower() == "triangle" && parts.Length >= 5)
+                        {
+                            int size2 = ifVariableOrValue(parts[4]);
+                            MyShape triangle = new MyTriangle(pen.Color, newX, newY, size1);
+                            canvas.DrawMyShape(triangle);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid 'repeat' command syntax. Loop count must be a variable or a numerical value.");
                 }
             }
             else
@@ -185,7 +218,8 @@ namespace ASEproject
                 Console.WriteLine("Invalid 'repeat' command syntax.");
             }
         }
-     
+
+
         /// <summary>
         /// Determines whether or not the input is a variable name or a numerical value and retrieves the corresponding value from the variables dictionary.
         /// </summary>
@@ -261,7 +295,12 @@ namespace ASEproject
 
            
         }
-        
+        /// <summary>
+        /// This will try to evaluate the specified numerical expression and retrieves the result for it
+        /// </summary>
+        /// <param name="expression">The mathematical expression to be evaluated.</param>
+        /// <param name="result">The result of the evaluation if successful, otherwise 0.</param>
+        /// <returns>True if the expression is successfully evaluated, false otherwise.</returns>
         private bool TryEvaluateExpression(string expression, out int result)
         {
             result = 0;

@@ -125,6 +125,7 @@ namespace ASEproject
         /// <summary>
         /// Event handler for validating commands upon button click.
         /// </summary>
+        
         private void syntaxButton_Click(object sender, EventArgs e)
         {
             string codeSingle = textBoxCommand.Text; //gets code from the single line text box

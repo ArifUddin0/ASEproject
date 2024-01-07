@@ -314,7 +314,7 @@ namespace aseTest
         }
 
         /// <summary>
-        /// Test to verify that the 'repeat' command uses a variable successfully.
+        /// Tests to verify that the repeat command uses a variable successfully as a number of loops
         /// </summary>
         [TestMethod]
         public void RepeatWithVariable_Test()
@@ -322,30 +322,34 @@ namespace aseTest
             Pen pen = new Pen(Color.Red, 5);
             MyCanvass canvas = new MyCanvass(350, 300);
 
-            // Assign a value to the variable 'x'
+            // Assign a value to the variable x
             string assignmentCommand = "let x equals 3";
             MyCommandParser assignmentParser = new MyCommandParser(assignmentCommand, pen, canvas);
 
-            // Define a command that uses the variable 'x' in the repeat loop count
-            string repeatCommand = "repeat x circle 20";
+            // An example of a command that uses the variable x in the repeat loop count
+            string repeatCommand = "repeat x circle 10";
             MyCommandParser repeatParser = new MyCommandParser(repeatCommand, pen, canvas);
 
-            // Get the list of executed commands
+            // Gets the list of executed commands completed
             List<string> executedCommands = canvas.GetExecutedCommands();
 
-            // Display the executed commands 
+            // Displasy the executed commands 
             Console.WriteLine("Executed Commands:");
             foreach (string executedCommand in executedCommands)
             {
                 Console.WriteLine(executedCommand);
             }
 
-            // Check if the variable 'x' is in the variables dictionary
+            // Checks if the variable x is in the variables dictionary
             Assert.IsTrue(MyCommandParser.variables.ContainsKey("x"), "Variable 'x' should be in the variables dictionary.");
 
-            // Check if the repeat loop executed the expected number of times
+            // Checks if the repeat loop has been executed the expected number of times
             Assert.AreEqual(3, executedCommands.Count(command => command.Contains("MyCircle")), "Expected 3 circles to be drawn.");
         }
+
+
+     
+        
 
     }
 }

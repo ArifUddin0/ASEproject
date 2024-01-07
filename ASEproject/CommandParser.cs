@@ -130,6 +130,15 @@ namespace ASEproject
                 HandleRepeatCommand(parts, pen, canvas);
 
             }
+
+            else if (parts[0] == "if")
+            {
+                HandleIfCommand(parts, pen, canvas);
+            }
+
+
+
+
         }
 
         /// <summary>
@@ -150,6 +159,7 @@ namespace ASEproject
                     //repeats the loop -example - repeat 5 (repeats it 5 times)
                     for (int i = 0; i < repeatCount; i++)
                     {
+                        // changes the position on the canvas to show its repeating
                         int newX = canvas.GetCurrentLocation().X + i * 5;
                         int newY = canvas.GetCurrentLocation().Y + i * 5;
                         canvas.MoveTo(newX, newY);
@@ -182,6 +192,7 @@ namespace ASEproject
                     int loopCount = variables[parts[1]];
                     for (int i = 0; i < loopCount; i++)
                     {
+                        // changes the position on the canvas to show its repeating
                         int newX = canvas.GetCurrentLocation().X + i * 5;
                         int newY = canvas.GetCurrentLocation().Y + i * 5;
                         canvas.MoveTo(newX, newY);
@@ -216,8 +227,10 @@ namespace ASEproject
             else
             {
                 Console.WriteLine("Invalid 'repeat' command syntax.");
+                // syntaxes for incorrect commands
             }
         }
+
 
 
         /// <summary>
@@ -324,8 +337,37 @@ namespace ASEproject
             {
                 return false;
             }
+
+
         
     }
+        private void HandleIfCommand(string[] parts, Pen pen, MyCanvass canvas)
+        {
+            //combines the condition back into a single string to be evaluated
+            string condition = string.Join(" ", parts.Skip(1).TakeWhile(p => p != "circle" && p != "rectangle" && p != "triangle"));
+            bool conditionMet = false;
+
+            if (condition.Contains("equals"))
+            {
+                string[] conditionParts = condition.Split(new string[] { "equals" }, StringSplitOptions.None);
+
+                string variableName = conditionParts[0].Trim();
+                string stringValue = conditionParts[1].Trim();
+
+                //checks wether or not the variable exists in the dictionary and its value mtaches with the condition
+                if (variables.TryGetValue(variableName, out int variableValue) && variableValue == int.Parse(stringValue))
+                {
+                    conditionMet = true;
+                }
+                
+            }
+            if (conditionMet)
+            {
+                //Extracts the command after the condition is done
+                string commandToExecute = string.Join(" ", parts.SkipWhile(p => p != "circle" && p != "rectangle" && p != "triangle"));
+                new MyCommandParser(commandToExecute, pen, canvas);
+            }
+        } 
 
 
         public string GetLastCommand()
@@ -333,6 +375,8 @@ namespace ASEproject
           return lastCommand;
         }
         //returns the last command
+
+
     }
     
 

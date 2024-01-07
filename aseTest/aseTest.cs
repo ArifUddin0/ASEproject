@@ -347,9 +347,40 @@ namespace aseTest
             Assert.AreEqual(3, executedCommands.Count(command => command.Contains("MyCircle")), "Expected 3 circles to be drawn.");
         }
 
+        /// <summary>
+        /// Test to verify that the 'if' statement correctly executes the command based on the condition.
+        /// </summary>
+        [TestMethod]
+        public void IfStatement_Test()
+        {
+            Pen pen = new Pen(Color.Red, 5);
+            MyCanvass canvas = new MyCanvass(350, 300);
 
-     
-        
+            // Assign a value to the variable 'x'
+            string assignmentCommand = "let x equals 5";
+            MyCommandParser assignmentParser = new MyCommandParser(assignmentCommand, pen, canvas);
+
+            // Define an 'if' statement with a condition that evaluates to true
+            string ifCommand = "if x equals 5 circle 10";
+            MyCommandParser ifParser = new MyCommandParser(ifCommand, pen, canvas);
+
+            // Get the list of executed commands
+            List<string> executedCommands = canvas.GetExecutedCommands();
+
+            // Display the executed commands 
+            Console.WriteLine("Executed Commands:");
+            foreach (string executedCommand in executedCommands)
+            {
+                Console.WriteLine(executedCommand);
+            }
+
+            // Check if the circle is drawn as the condition is true
+            Assert.IsTrue(executedCommands.Any(command => command.Contains("MyCircle")), "Circle should be drawn based on the 'if' condition.");
+        }
+
+
+
+
 
     }
 }

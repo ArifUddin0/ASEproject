@@ -341,6 +341,13 @@ namespace ASEproject
 
         
     }
+
+        /// <summary>
+        /// Handles the if command to conditionally execute a command
+        /// </summary>
+        /// <param name="parts">The array of command parts.</param>
+        /// <param name="pen">The Pen object used for drawing.</param>
+        /// <param name="canvas">The canvas where the shapes are drawn.</param>
         private void HandleIfCommand(string[] parts, Pen pen, MyCanvass canvas)
         {
             //combines the condition back into a single string to be evaluated
